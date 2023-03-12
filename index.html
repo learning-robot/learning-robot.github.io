@@ -1,3 +1,832 @@
-<h1›Hello world!</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<h2> work in progress </h2>
+<head>
+  <link rel="icon" href="assets/img/icon.png">
+  <!-- Basic Page Needs –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>On Designing a Learning Robot</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <!-- Google Analytics - Learning Page only -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-19T60DSSQG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-19T60DSSQG');
+  </script>
+  <!-- TIPPY -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+  <!-- LaTeX -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!-- Video control logic -->
+  <script defer src="js/video.js"></script>
+
+
+</head>
+
+
+<body>
+  <!-- VIDEO BANNER -->
+  <div class="banner-container">
+    <video class="banner-video no-controls-video" autoplay loop muted preload="auto" playsinline width="100%">
+      <source src="assets/videos/motion_banner.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="container">
+    <div class="row" style="margin-top: 6%">
+      <div class="body-text">
+        <center>
+          <h1><b>On Designing a Learning Robot:</b></h1>
+          <h2>Improving Morphology for Enhanced Task Performance and Learning</h2>
+        </center>
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns text-center">
+        <font size="+2">
+          <a target="_blank" rel="noopener noreferrer" href="https://initmaks.com/">
+            <nobr>Maks Sorokin</nobr>
+          </a><sup>1*,2</sup> &emsp;&emsp;
+          Chuyuan Fu<sup>1</sup> &emsp;&emsp;
+          <a target="_blank" rel="noopener noreferrer" href="https://www.jie-tan.net">
+            <nobr>Jie Tan</nobr>
+          </a><sup>3</sup> &emsp;&emsp;
+          <a target="_blank" rel="noopener noreferrer" href="https://ckllab.stanford.edu">
+            <nobr>C. Karen Liu</nobr>
+          </a><sup>4</sup>
+          <br>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.yunfei-bai.com">
+            <nobr>Yunfei Bai</nobr>
+          </a><sup>5</sup> &emsp;
+          Wenlong Lu<sup>1</sup> &emsp;
+          <a target="_blank" rel="noopener noreferrer" href="https://www.cc.gatech.edu/~sha9/">
+            <nobr>Sehoon Ha</nobr>
+          </a><sup>2</sup> &emsp;
+          Mohi Khansari<sup>1</sup>
+        </font>
+        <br>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="margin-top: 1%">
+    <div class="row">
+      <div class="six columns text-right">
+        <sup>1</sup><img src="assets/img/EverydayRobots.gif" alt="EverydayRobots" class="logo-image">
+      </div>
+      <div class="six columns text-left">
+        <sup>2</sup><img src="assets/img/GeorgiaTechLogo.png" alt="Georgia Tech" class="logo-image">
+      </div>
+    </div>
+    <div class="row">
+      <div class="six columns text-right">
+        <sup>3</sup><img src="assets/img/RoboticsAtGoogleLogo.png" alt="Robotics at Google" class="logo-image">
+      </div>
+      <div class="six columns text-left">
+        <sup>4</sup><img src="assets/img/StanfordUniversityLogo.png" alt="Stanford University" class="logo-image">
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns text-center">
+        <nobr> <sup>5</sup> <small>Work done while at Everyday Robots.</small><br>
+          <nobr> <sup>*</sup> <small>The research was conducted during PhD Residency at Everyday Robots.</small></nobr>
+      </div>
+    </div>
+  </div>
+  <div class="container"> <!-- READ PAPER IMG -->
+    <div class="row" style="margin-top: 1%">
+      <div class="twelve columns text-center">
+        <a href="https://arxiv.org/pdf/???.pdf"><img src="assets/img/read_the_paper.png" alt="Read the paper link"
+            id="read-paper-img" class="read-paper-img"></a><br>
+        Preprint 2023 (<a href="https://arxiv.org/abs/???">arXiv</a>)
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row" style="margin-top: 1%">
+      <div class="one columns">&nbsp;</div>
+      <div class="ten columns">
+        <h3>Abstract</h3>
+
+        <p class="abstract">
+          As robots become more prevalent, optimizing their design for better performance and efficiency is becoming
+          increasingly important.
+          However, current robot design practices overlook the impact of perception and design choices on a robot's
+          learning capabilities.
+          To address this gap, we propose a comprehensive methodology that accounts for the interplay between the
+          robot's perception, hardware characteristics, and task requirements.
+          Our approach optimizes the robot's morphology holistically, leading to improved learning and task execution
+          proficiency.
+          To achieve this, we introduce a <b><u>M</u>orphology-<u>AG</u>nost<u>I</u>c <u>C</u>ontroller
+            (<u>MAGIC</u>)</b>, which helps with the rapid assessment of different robot designs.
+          The MAGIC policy is efficiently trained through a novel <b><u>PRI</u>vileged <u>S</u>ingle-stage
+            learning via latent align<u>M</u>ent (<u>PRISM</u>)</b> framework, which also encourages behaviors that
+          are
+          typical of robot onboard observation.
+          Our simulation-based results demonstrate that morphologies optimized holistically improve the robot
+          performance by 15-20% on various manipulation tasks, and require 25x less data to match human-expert made
+          morphology performance.
+          In summary, our work contributes to the growing trend of learning-based approaches in robotics and
+          emphasizes the potential in designing robots that facilitate better learning.
+        </p>
+      </div>
+      <div class="one columns">&nbsp;</div>
+    </div>
+  </div>
+
+  <br>
+
+
+  <div class="container"> <!-- TWO LOOP / ONE LOOP ----------------– -->
+    <div class="row title-row">
+      <maintitle>Approach</maintitle>
+    </div>
+
+    <div class="row text-row">
+      <p>&nbsp
+        Learning has been one of the most promising tools for operating robots in unstructured environments,
+        enabling them to acquire complex perception and reasoning capabilities.
+        However, the current status quo of designing robots does not account for the impact of learning: rather, many
+        robots are still designed based on human experts' intuition or hand-crafted heuristics.
+        Therefore, such designs can lead to a sub-optimal performance by causing unexpected visual occlusions.
+        This is where the idea of guiding robot design to improve the robot learning capability comes in, inspired by
+        the evolutionary process.
+      </p>
+    </div>
+    <div class="row" id="fig-occlusions">
+      <div class="twelve columns text-center">
+        <span style="font-size: 1em;">Occlusions: </span>
+        <label class="button">
+          <input type="radio" name="occlusion" value="occlusion1" onclick="setRadioClass(this); changeOcclusionTask();"
+            checked>
+          Example 1
+        </label>
+        <label class="button">
+          <input type="radio" name="occlusion" value="occlusion2" onclick="setRadioClass(this); changeOcclusionTask();">
+          Example 2
+        </label>
+        <label class="button">
+          <input type="radio" name="occlusion" value="occlusion3" onclick="setRadioClass(this); changeOcclusionTask();">
+          Example 3
+        </label>
+        <label class="button">
+          <input type="radio" name="occlusion" value="occlusion4" onclick="setRadioClass(this); changeOcclusionTask();">
+          Example 4
+        </label>
+      </div>
+      <div class="row">
+        <div class="six columns">
+          <video id="occlusion-fpv-video" loop muted preload="auto" playsinline width="100%"
+            ontimeupdate="updateOcclusionSlider(this)">
+            <source src="assets/videos/occlusions/occlusion1_fpv.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="six columns">
+          <video id="occlusion-side-video" loop muted preload="auto" playsinline width="100%">
+            <source src="assets/videos/occlusions/occlusion1_side.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="row">
+        <div class="controls">
+          <button id="play-pause-occlusion" onclick="toggleOcclusionPlayPause()">►</button>
+          <input type="range" name="occlusionslider" min="0" max="100" value="0" step="0.1"
+            oninput="updateOcclusionVideos(this.value)" />
+        </div>
+        <figcaption>
+          <b>Figure 1.</b> - Examples of naturally occurring object and workspace occlusions due to the pose and
+          configuration of the robot.
+        </figcaption>
+      </div>
+    </div>
+    <div class="row text-row">
+      <p>&nbsp
+        This work particularly aims to discuss the design optimization for vision-based manipulation.
+        In the general context of manipulation, visual sensors provide a rich stream of information that allow robots to
+        perform tasks such as grasping, object manipulation, and assembly.
+        The use of visual sensors in manipulation, however, inevitably poses challenges associated with complete or
+        partial field-of-view occlusion, which can degrade performance due to limited perception (<a
+          href="#fig-occlusions">Fig. 1</a>).
+        Whether an occlusion is harmless or fatal often depends on the task at hand and the stage of task execution.
+        Such scenarios motivate us to explore hardware optimization without neglecting the interplay between the robot's
+        morphology, onboard perception abilities, and their interaction in different tasks.
+      </p>
+    </div>
+    <div class="row" id="fig-optim-loops">
+      <div class="six columns">
+        <div class="video-container">
+          <video id="two-loop" class="video play-on-hover" loop muted preload="auto" playsinline>
+            <source src="assets/videos/twoloop.mp4" type="video/mp4">
+          </video>
+          <div class="overlay">
+            <img src="assets/img/hover.png" alt="Hover icon" class="hover-button">
+            <span class="hover-to-play-text">(hover to play)</span>
+          </div>
+        </div>
+      </div>
+      <div class="six columns">
+        <div class="video-container">
+          <video id="one-loop" class="video play-on-hover" loop muted preload="auto" playsinline>
+            <source src="assets/videos/oneloop.mp4" type="video/mp4">
+          </video>
+          <div class="overlay">
+            <img src="assets/img/hover.png" alt="Hover icon" class="hover-button">
+            <span class="hover-to-play-text">(hover to play)</span>
+          </div>
+        </div>
+      </div>
+      <figcaption>
+        <b>Figure 2.</b> A side-by-side comparison of existing vs proposed hardware design optimization approaches.
+      </figcaption>
+    </div>
+    <div class="row text-row">
+      <p>&nbsp
+        Unlike typical two-loop morphology optimization frameworks (<a href="#fig-optim-loops">Fig. 2 - left</a>),
+        our key idea is to leverage the morphology-agnostic policy $\pi^\triangle$ trained only once.
+        Once the morphology-agnostic controller is learned, we optimize robot design parameters using Vizier optimizer
+        using the controller's performance as a surrogate measure (<a href="#fig-optim-loops">Fig. 2 - right</a>).
+        Such an approach provides a more accurate evaluation of observability and reachability in terms of
+        "learnability", and it is substantially more feasible than per-design training.
+      </p>
+    </div>
+  </div>
+  <div class="container"> <!-- MAGIC POLICY ----------------– -->
+    <div class="row title-row">
+      <maintitle>Morphology-Agnostic Controller</maintitle>
+    </div>
+    <div class="row" id="fig-magic">
+      <div class="twelve columns text-center">
+        <video id="magic_overlap" autoplay loop muted preload="auto" playsinline width="100%">
+          <source src="assets/videos/magic_policy_motions.mp4" type="video/mp4">
+        </video>
+        <figcaption>
+          <b>Figure 3.</b> <u>M</u>orphology-<u>AG</u>nost<u>I</u>c <u>C</u>ontroller
+          (<u>MAGIC</u>) policy is capable of controlling a range of morphologies using onboard visual observations,
+          greatly reducing the costs of traditional two-loop design optimization. <b>(left)</b> onboard camera
+          observations
+          that are used to generate robot action. <b>(right)</b> top camera view of the robot performing the task
+        </figcaption>
+      </div>
+    </div>
+    <div class="row text-row">
+      <p>&nbsp
+        Morphology-Agnostic Controller $\pi^\triangle$ (<a href="#fig-magic">Fig. 3</a>) is a neural network policy
+        trained to control a wide range of robot morphologies using the onboard camera sensing.
+        The policy $\pi^\triangle$ through learning is <i>primed</i> to disregard occlusions from onboard observation
+        to generate suitable actions.
+        Hence, if the $\pi^\triangle$ is successful, then the information is sufficient, meaning that the morphology
+        does not cause any major occlusions that prevent the task success.
+        The policy $\pi^\triangle$ is used to measure a surrogate performance metric, helping to rapidly assess
+        the quality of different morphologies.
+      </p>
+    </div>
+  </div>
+
+  <div class="container"> <!-- Framework ----------------– -->
+    <div class="row title-row">
+      <maintitle>Priveleged single-stage learning framework</maintitle>
+    </div>
+  </div>
+  <div class="container-architecture text-center">
+    <div class="image-container" id="fig-prism">
+      <img src="assets/img/architecture.png" alt="Pipeline architecture" width="100%">
+      <!-- HOVER ITEMS ----------------– -->
+      <div id="tippy-content" style="display: none;"> <!-- ITEM START ----------------– -->
+        <div class="arch-details">
+          <b>Data Collection</b> - demonstrates a few robot designs randomly generated during the collection process.
+          Robot trajectories are collected using motion planning and only successful trajectories are stored in the
+          Trajectory Buffer.
+        </div>
+      </div>
+      <div class="point" data-tippy-content="#tippy-content" style="position: absolute; top: 4.1%; left: 14.1%;">
+        <b>1</b>
+      </div> <!-- ITEM END ----------------– -->
+      <div id="tippy-content-2" style="display: none;"> <!-- ITEM START ----------------– -->
+        <div class="arch-details">
+          <b>Privileged states</b> consist of:
+          <ul>
+            <li> $I \in R^{[150\times150\times3]}$ - image observation rendered from the robot's onboard camera.</li>
+          </ul>
+          <b>Augmentation</b> - To regularize the network and make it robust to occlusions from different robot
+          morphologies, we use image
+          augmentation during the training process. We use the <i>imgaug</i> library to augment camera
+          images during training. For each image, we apply either <i>Cutout</i> (random patch dropout) or
+          <i>CoarseDropout</i> (smaller but more frequent patch dropout) augmentation with a 50% chance.
+          We find these augmentations to be of high importance for training all our policies.
+        </div>
+      </div>
+      <div class="point" data-tippy-content="#tippy-content-2" style="position: absolute; top: 4.1%; left: 38.9%;">
+        <b>2</b>
+      </div> <!-- ITEM END ----------------– -->
+      <div id="tippy-content-3" style="display: none;"> <!-- ITEM START ----------------– -->
+        <div class="arch-details">
+          <b>Encoder $R$</b> - processes information $I$ obtained from onboard sensors (e.g., cameras) to generate
+          unit-vector embedding $z^R$.
+        </div>
+      </div>
+      <div class="point" data-tippy-content="#tippy-content-3" style="position: absolute; top: 4.1%; left:54.4%;">
+        <b>3</b>
+      </div> <!-- ITEM END ----------------– -->
+      <div id="tippy-content-4" style="display: none;"> <!-- ITEM START ----------------– -->
+        <div class="arch-details">
+          <b>Privileged states</b> consist of:
+          <ul>
+            <li>$J \in R^{8}$ - positions of the robot's arm joints.</li>
+            <li>$E^{curr/goal} \in R^{11}$ - current and goal states of the robot's end-effector, including Cartesian
+              coordinates, quaternion orientation, and finger positions.</li>
+            <li>$B \in R^{7}$ - position and orientation of the object being manipulated during the task.</li>
+            <li>$F \in R^{2}$ - an indicator of contact between the fingers and the object, and the distance between
+              them.</li>
+            <li>$W \in R^{2}$ - openness state of the cabinet, used to track the progress of the closing task.</li>
+          </ul>
+          <b>Privileged states</b> provide a comprehensive representation that is only used to bootstrap the learning
+          efficiency of the policy. These states do not suffer from sensor limitations or occlusions, notably, they
+          are
+          unobtainable during the policy deployment.
+        </div>
+      </div>
+      <div class="point" data-tippy-content="#tippy-content-4" style="position: absolute; top: 49.9%; left: 39.9%;">
+        <b>4</b>
+      </div> <!-- ITEM END ----------------– -->
+      <div id="tippy-content-5" style="display: none;"> <!-- ITEM START ----------------– -->
+        <div class="arch-details">
+          <b>Encoder $P$</b> - extracts unit-vector embedding $z^P$ from privileged state which contains a
+          comprehensive
+          information about the robot and workspace.
+        </div>
+      </div>
+      <div class="point" data-tippy-content="#tippy-content-5" style="position: absolute; top: 49.9%; left:54.4%;">
+        <b>5</b>
+      </div> <!-- ITEM END ----------------– -->
+      <div id="tippy-content-6" style="display: none;"> <!-- ITEM START ----------------– -->
+        <div class="arch-details">
+          $z^P$ and $z^R$ are explicitly aligned using Huber loss to produce mutual information.
+          This alignment emulates the transfer stage in a two-stage privileged learning setup.
+        </div>
+      </div>
+      <div class="point" data-tippy-content="#tippy-content-6" style="position: absolute; top: 13.1%; left:77.1%;">
+        <b>7</b>
+      </div> <!-- ITEM END ----------------– -->
+      <div id="tippy-content-7" style="display: none;"> <!-- ITEM START ----------------– -->
+        <div class="arch-details">
+          <b>Encoder $M$</b> produces $z^M$ using $m \in R^{7}$; $m$ contains configuration parameters that define the
+          robot's physical structure and configuration.
+        </div>
+      </div>
+      <div class="point" data-tippy-content="#tippy-content-7" style="position: absolute; top: 56.8%; left:75.7%;">
+        <b>8</b>
+      </div> <!-- ITEM END ----------------– -->
+      <div id="tippy-content-8" style="display: none;"> <!-- ITEM START ----------------– -->
+        <div class="arch-details">
+          <b>Policy head $\pi$</b> generates onboard and privileged actions $a^P$/ $a^R$ using morphology
+          embedding $z^M$, and $z^P$/$z^R$.
+          As such onboard $(\pi_P^\triangle\gets\pi(z^P,z^M))$ and privileged $(\pi_R^\triangle\gets\pi(z^R,z^M))$
+          policies are trained jointly via latent alignment and share policy head $\pi$.
+        </div>
+      </div>
+      <div class="point" data-tippy-content="#tippy-content-8" style="position: absolute; top: 31.1%; left:91.1%;">
+        <b>9</b>
+      </div> <!-- ITEM END ----------------– -->
+
+      <!-- HOVER ITEMS END ----------------– -->
+      <div id="tippy-instance"></div>
+    </div>
+    <div class="tooltip"></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="twelve columns">
+        <figcaption>
+          <b>Figure 4.</b> <u>M</u>orphology-<u>AG</u>nost<u>I</u>c <u>C</u>ontroller
+          (<u>MAGIC</u>) trained via <u>PRI</u>vileged <u>S</u>ingle-stage learning via latent align<u>M</u>ent
+          (<u>PRISM</u>) <b>(hover over <span class="point"><b>&nbsp;&nbsp;#&nbsp;</b> </span>&nbsp;to expand)</b>
+        </figcaption>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row text-row">
+      <p>&nbsp
+        To train MAGIC, we introduce <b><u>PRI</u>vileged <u>S</u>ingle-stage learning via latent align<u>M</u>ent
+          (<u>PRISM</u>)</b>, which unifies the traditional two-stage approach into single-stage by using a latent space
+        alignment loss during the optimization process. <a href="#fig-prism">Fig. 4</a> summarizes the overall
+        architecture of PRISM.
+      </p>
+    </div>
+  </div>
+
+  <div class="container" id="fig-prism-motivation">
+    <div class="row">
+      <div class="six columns text-center">
+        <i>"supernatural" (privileged) motion</i>
+        <video id="supernatural" class="video" muted preload="auto" playsinline>
+          <source src="assets/videos/supernatural_motion.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="six columns text-center">
+        <i>realistic (onboard sensor) behavior</i>
+        <video id="desired" class="video" muted preload="auto" playsinline>
+          <source src="assets/videos/desired_motion.mp4" type="video/mp4">
+        </video>
+      </div>
+      <figcaption>
+        <b>Figure 6.</b> Motivating illustration for <u>PRI</u>vileged <b><u>S</u>ingle-stage</b> learning via
+        latent align<u>M</u>ent (<u>PRISM</u>)
+        <b>(left)</b> - <u>supernatural</u> robot motion enabled through use of privileged information.
+        <b>(right)</b> - <u>realistic</u> robot motion, characteristic of onboard sensing, enabled via single-stage
+        privileged learning using PRISM framework.
+      </figcaption>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="row text-row">
+      <p>&nbsp
+        Single-stage unification allows us to discourage the student policy from learning behaviors which incorrectly
+        exploit the information only present in privileged states (<a href="#fig-prism-motivation">Fig. 5 - left</a>)
+        which is
+        important to learn realistic vision-based policies (<a href="#fig-prism-motivation">Fig. 5 - right</a>).
+        To make this approach possible, we use a combination of loss functions to train the policy network.
+        We use Behavioral Cloning for action and explicitly align information in the encoder latent space.
+      </p>
+    </div>
+  </div>
+
+  <div class="container"> <!-- TASK MOTIONS ----------------– -->
+    <div class="row title-row">
+      <maintitle>Tasks</maintitle>
+    </div>
+    <div class="row" id="fig-task-motions">
+      <div class="six columns text-center">
+        <span style="font-size: 1em;">Task: </span>
+        <label class="button">
+          <input type="radio" name="task" value="grasp" onclick="setRadioClass(this); changeVideoTask();" checked>
+          grasp
+        </label>
+        <label class="button">
+          <input type="radio" name="task" value="place" onclick="setRadioClass(this); changeVideoTask();">
+          place
+        </label>
+        <label class="button">
+          <input type="radio" name="task" value="close" onclick="setRadioClass(this); changeVideoTask();">
+          close
+        </label>
+      </div>
+      <div class="six columns text-center">
+        <span style="font-size: 1em;">View: </span>
+        <label class="button">
+          <input type="radio" name="camview" value="top" onclick="setRadioClass(this); changeVideoTask();" checked>
+          top
+        </label>
+        <label class="button">
+          <input type="radio" name="camview" value="side" onclick="setRadioClass(this); changeVideoTask();">
+          side
+        </label>
+        <label class="button">
+          <input type="radio" name="camview" value="back" onclick="setRadioClass(this); changeVideoTask();">
+          back
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="six columns">
+        <video id="task-video" loop muted preload="auto" playsinline width="100%" ontimeupdate="updateTaskSlider(this)">
+          <source src="assets/videos/tasks/grasp_fpv_view.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="six columns">
+        <video id="cam-video" loop muted preload="auto" playsinline width="100%">
+          <source src="assets/videos/tasks/grasp_top_view.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+        <div class="controls">
+          <button id="play-pause" onclick="toggleTaskPlayPause()">►</button>
+          <input type="range" name="taskslider" min="0" max="100" value="0" step="0.1"
+            oninput="updateVideos(this.value)" />
+        </div>
+        <figcaption>
+          <b>Figure 7.</b> Manipulation task examples.
+          <b>(left)</b> - onboard camera (first person view) video.
+          <b>(right)</b> - top/side/back view camera video.
+        </figcaption>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row text-row">
+      <p>&nbsp
+        We use reaching and manipulation tasks for training the policy. The reaching task involves moving the
+        end-effector to a specific goal position, while the manipulation task involves picking an object, placing it in
+        a cabinet, and closing the cabinet door (<a href="#fig-task-motions">Fig. 7</a>).
+      </p>
+    </div>
+  </div>
+
+
+  <div class="container"> <!-- DATA COLECTION EXAMPLES ----------------– -->
+
+    <div class="row title-row">
+      <maintitle>Data</maintitle>
+    </div>
+    <div class="row" id="fig-morphologies">
+      <div class="twelve columns text-center">
+        <img src="assets/img/morphologies.png" alt="Robot Design Examples" width="100%">
+        <figcaption>
+          <b>Figure 8.</b> Examples of robot morphologies used in data collection. During collection each morphology
+          link lenghts are sampled uniformly at random from link specific ranges.
+        </figcaption>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row text-row">
+      <p>&nbsp
+        The data collection process involves initializing a morphology with uniformly sampled link lengths (<a
+          href="#fig-morphologies">Fig. 8</a>) and
+        collecting trajectories using a motion planner (IK with collision avoidance).
+        We use PyBullet simulator to collect the demonstration data.
+        In total, we collect 500k successful trajectories for training the MAGIC policy.
+      </p>
+    </div>
+  </div>
+
+  <div class="container" id="fig-oneloop">
+    <div class="row title-row">
+      <maintitle>Hardware Optimization</maintitle>
+    </div>
+    <div class="row">
+      <div class="three columns">&nbsp</div>
+      <div class="six columns">
+        <div class="video-container">
+          <video id="one-loop" class="video" autoplay loop muted preload="auto" playsinline>
+            <source src="assets/videos/oneloop.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="three columns">&nbsp</div>
+    </div>
+    <figcaption style="text-align: center;">
+      <b>Figure 9.</b> Single loop optimization using MAGIC policy as a surrogate evaluator.
+    </figcaption>
+  </div>
+
+  <div class="container">
+    <div class="row text-row">
+      <p>&nbsp
+        The objective function for the optimization is the success rate of the morphology-agnostic policy
+        $\pi^\triangle$ on the task of reaching and/or manipulation.
+        The success rate of $\pi^\triangle$ serves as a <i>surrogate</i> measure of the robot morphology quality.
+        We use a sampling-based optimization algorithm Vizier, to optimize robot design parameters, to efficiently
+        search for the optimal solution among a large number of possible morphologies (<a href="#fig-oneloop">Fig.
+          9)</a>
+      </p>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row title-row">
+      <maintitle>Targeted policy</maintitle>
+    </div>
+    <div class="row text-row">
+      <p>&nbsp
+        A <i>targeted</i> policy $\pi^T$ is a controller designed to control a specific robot, unlike a MAGIC
+        $\pi^\triangle$ policy,
+        which is designed to perform well across multiple robots.
+        We use targeted policy as an <b>ablation</b> to evaluate how much the performance of our proposed MAGIC policy
+        $\pi^\triangle$ is compromised to accommodate for multi-morphology capability.
+
+        We train the <i>targeted</i> policy $\pi^T$ using PRISM but with a fixed robot design.
+        For a particular robot, we collect $100$k successful targeted demonstrations while keeping morphology $m_i$
+        intact during the data collection process.
+        We use targeted demonstration to train the targeted policy $\pi^T$ from scratch until convergence.
+      </p>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row title-row">
+      <maintitle>Experiments</maintitle>
+    </div>
+    <div class="row text-row">
+      The results of our experimentation are structured to answer the following questions:
+      <ol class="questions-list" style="margin-top: 1em;">
+        <li> Does a morphology-agnostic policy provide a good surrogate of a true performance?
+        </li>
+        <li> How does the MAGIC-optimized design compare to a human-expert design?
+        </li>
+        <li> How does incorporating onboard sensing affects the morphology optimization process?
+        </li>
+        <li> What effects do additional robot tasks have on the optimized robot morphology?
+        </li>
+      </ol>
+    </div>
+
+    <div class="row" id="results-fig"> <!-- TARGETED vs MAGIC -->
+      <subtitle>Targeted vs. Morphology-Agnostic Policies</subtitle>
+      <div class="twelve columns text-center">
+        <img src="assets/img/optim_vs_human.png" class="results-fig" width="100%">
+      </div>
+      <figcaption>
+        <b>Figure 10.</b>
+        <b>Targeted vs. Morphology-Agnostic Policies.</b>
+        MAGIC $\pi^\triangle$ and <i>targeted</i> $\pi^T$ policies have a 14.44% performance gap on the
+        <i>human-expert</i> design,
+        which shrinks to 1% on the MAGIC-optimized design.
+        We omit the targeted performance evaluation on random morphologies due to computational cost.
+
+      </figcaption>
+    </div>
+
+    <div class="row text-row">
+      <div class="twelve columns">
+        <p>&nbsp;
+          We report the performance of the morphology-agnostic controller $\pi^\triangle$ and targeted controller
+          $\pi^T$ on a human-expert robot design $m^H$ and the best MAGIC-optimized solution candidate $m^\star$ (<a
+            href="#results-fig">Fig. 10</a>).
+          We find that the reaching task performance of the $\pi^\triangle$ and $\pi^T$ is nearly identical for $m^H$
+          (difference: &lt;1%).
+          On the other hand, the performance on $m^\star$ design has a gap of 14.44%.
+          We hypothesize that $m^H$ causes less occlusion and hence is easier to control using $\pi^\triangle$ compared
+          to $m^H$.
+          However, policy $\pi^T$; can learn to exploit the structure of occluding arm to infer the missing information,
+          such as a rough pose of an end-effector, through targeted re-training.
+
+        </p>
+      </div>
+    </div> <!-- END OF ROW -->
+    <div class="row" id="better-learner-fig"> <!-- ROBOT PERFORMANCE & LEARNING EFFICIENCY -->
+      <subtitle>Comparison to a human-expert design</subtitle>
+      <div class="twelve columns text-center">
+        <img src="assets/img/better_learner.png" class="results-fig" width="100%">
+      </div>
+      <figcaption>
+        <b>Figure 11.</b>
+        <b>Robot Performance & Learning Efficiency.</b>
+        <b>(a)</b> <i>Learning oriented</i> morphology design outperforms the <i>human-expert</i> design by 18.95%
+        when trained with the same amount of data.
+        <b>(b)</b> <i>Learning oriented</i> design can achieve the same performance as <i>human-expert</i> design using
+        25x less data.
+      </figcaption>
+    </div>
+    <div class="row text-row">
+      <div class="twelve columns">
+        <p>&nbsp;
+          Next, we analyze the difference between MAGIC-optimized $m^\star$ and human-expert $m^H$ designs in terms of
+          task performance and learning efficiency (<a href="#better-learner-fig">Fig. 11</a>).
+          We highlight the absolute performance improvement of targeted policies when evaluated on $m^\star$ compared
+          to $m^H$ on the task of reaching.
+          Specifically, $m^\star$ achieves success rate of 80.19% compared to 61.24% with $m^H$.
+          <br>&nbsp;
+          The performance gain on $m^\star$ could be attributed to a reduced frequency of sensor occlusions.
+          We hypothesize that the reduced distortion of onboard information can also result in a higher quality of data
+          during collection, which naturally leads to improved robot learning capabilities.
+          To measure the learning efficiency, we compare the success rates of the policies trained with a varying number
+          of demonstrations.
+          <a href="#better-learner-fig">Fig. 11</a> shows that $m^\star$ is a better-suited robot for learning compared
+          to $m^H$, as it requires 25x less data than $m^H$ to reach the same performance when training the
+          controller from scratch.
+        </p>
+      </div>
+    </div> <!-- END OF ROW -->
+    <div class="row" id="fig-priv-vs-real"> <!-- ONBOARD VS PRIVILEGED OBJECTIVES -->
+      <subtitle>Significance of onboard sensing</maintitle>
+        <div class="twelve columns text-center">
+          <img src="assets/img/best_priv_vs_real.png" class="results-fig" width="100%">
+        </div>
+        <figcaption>
+          <b>Figure 12.</b>
+          <b>Onboard and privileged design objective comparison.</b>
+          Morphology optimized using privileged objective has a major performance drop when evaluated using onboard
+          information, emphasizing the importance of evaluation with onboard sensing.
+        </figcaption>
+    </div>
+    <div class="row text-row">
+      <div class="twelve columns">
+        <p>&nbsp;
+          Next, we seek to investigate the significance of onboard sensing during design optimization.
+          If the robot policy is given access to all of the information present in the environment, a robot may be able
+          to reach its upper-bound performance, which is mostly constrained by kinematic and dynamic capabilities.
+          However, it might perform suboptimally when tested with onboard sensing because the morphology can limit its
+          sensing capabilities via visual occlusions.
+          <br>&nbsp;
+          We use a privileged controller $\pi_P^\triangle$ during the morphology optimization phase, which acts as an
+          optimal motion planner with the ground-truth robot and task information.
+          Once the morphology is found, we evaluate its performance with the policy which relies on onboard information
+          $\pi_R^\triangle$.
+          In <a href="#fig-priv-vs-real">Fig. 12</a>, we compare the performance of privileged information morphology
+          and
+          onboard sensing morphology $m^\star$.
+          We observe that if we only use the privileged policy during the morphology design, there is a significant
+          84% drop in performance when the robot is evaluated with onboard sensing. In contrast, $m^\star$ performs
+          well in both onboard and privileged settings.
+        </p>
+      </div>
+    </div> <!-- END OF ROW -->
+    <div class="row" id="fig-manipulation-detailed"> <!-- ONBOARD VS PRIVILEGED OBJECTIVES -->
+      <div class="twelve columns text-center">
+        <maintitle>Multitask-based regularization</maintitle>
+        <img src="assets/img/manipulation_detailed.png" class="results-fig-wide" width="100%">
+      </div>
+      <figcaption>
+        <b>Figure 13.</b>
+        <b>Various design performance comparison on the manipulation task.</b>
+        Overall MAGIC-optimized top solution candidates perform ~15% better than <i>human-expert</i> design.
+        Different optimization candidates show varying levels of performance at different sub-tasks, allowing a human to
+        make a final decision about the performance trade-offs.
+      </figcaption>
+    </div>
+    <div class="row text-row">
+      <div class="twelve columns">
+        <p>&nbsp;
+          Finally, we investigate the direction of task-based regularization, through the exposure of the robot to a
+          wider set of manipulation tasks.
+          There exists a large number of regularization approaches applied during the optimization to improve the
+          practicality of the design such as energy, or material penalties.
+          However, we intend to avoid an explicit regularization that can directly impact the final morphology. Instead,
+          we seek implicit regularization via learning on multiple tasks.
+          We repeat data collection, training, and optimization procedures with manipulation tasks and report the
+          performance of multiple solution candidates in <a href="#fig-manipulation-detailed">Fig.13</a>.
+        </p>
+      </div>
+    </div> <!-- END OF ROW -->
+    <div class="row" id="fig-morph-regularizaiton"> <!-- ONBOARD VS PRIVILEGED OBJECTIVES -->
+      <div class="twelve columns text-center">
+        <img src="assets/img/morph_change.png" class="results-fig-wide" width="100%">
+      </div>
+      <figcaption>
+        <b>Figure 14.</b>
+        <b>Task Complexity Effects on Robot Design</b>
+        Optimized link lengths of the robot morphologies tend to converge to more plausible solutions when optimized on
+        more complex tasks.
+      </figcaption>
+    </div>
+    <div class="row text-row">
+      <div class="twelve columns">
+        <p>&nbsp;
+          In addition to seeing similar trends in performance improvements of MAGIC-optimized design $m^\star$ in
+          manipulation
+          similar to reaching task, we also observe overall improvements in the robot design solutions.
+          <a href="#fig-morph-regularizaiton">Fig 14.</a> compares two robot morphologies: one optimized for the
+          reaching task, and one that is optimized for the manipulation task.
+          Not surprisingly, the type and complexity of the tasks being considered could significantly impact the optimal
+          morphology design.
+          Hence, including multiple tasks during the optimization process can lead to a more regularized morphology,
+          with shorter and more manageable links that are likely easier to manufacture.
+        </p>
+      </div>
+    </div> <!-- END OF ROW -->
+  </div>
+
+  <div class="container"> <!-- CITATION ----------------– -->
+    <br>
+    <div class="twelve columns">
+      <div class="one columns">&nbsp;</div>
+      <div class="ten columns">
+        <h3>Citation</h3>
+        <pre><code>@{}</code></pre>
+      </div>
+      <div class="one columns">&nbsp;</div>
+    </div>
+
+  </div>
+  <div class="container"> <!-- READ PAPER IMG -->
+    <div class="row" style="margin-top: 5%">
+      <div class="twelve columns text-center">
+        <a href="https://arxiv.org/pdf/???.pdf"><img src="assets/img/read_the_paper.png" alt="Read the paper link"
+            id="read-paper-img" class="read-paper-img"></a><br>
+        Preprint 2023 (<a href="https://arxiv.org/abs/???">arXiv</a>)
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</body>
+
+</html>

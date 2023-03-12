@@ -1,0 +1,259 @@
+/* CSS styles */
+body {
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+maintitle {
+  font-size: 32px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+subtitle {
+  font-size: 24px;
+}
+
+.title-row {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.banner-container {
+  position: relative;
+}
+
+.no-controls-video {
+  width: 100%;
+}
+
+.abstract {
+  text-align: justify;
+}
+
+.logo-image{
+  height: 45px;
+  max-width: 100%;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.container{
+  max-width: 800px;
+}
+
+.video-summary{
+  text-align: center;
+  margin: 0 auto;
+}
+
+.read-paper-img{
+  margin-top: 20px;
+  width: 100%;
+  max-width: 200px;
+}
+
+.results-fig{
+  width: 100%;
+  max-width: 450px;
+}
+.results-fig-wide{
+  width: 100%;
+  max-width: 650px;
+}
+
+.text-row{
+  text-align: justify;
+  /* margin-top: 20px; */
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+figcaption {
+  text-align: justify;
+  font-size: 16px;
+  color: #666666;
+}
+
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+input[name="camview"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #ddd;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #0074D9;
+  cursor: auto;
+}
+
+
+.controls {
+  display: flex;
+  align-items: center;
+}
+
+.controls button {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.controls input[type="range"] {
+  display: block;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #ddd;
+  outline: none;
+  margin: 0;
+}
+
+
+.video-container {
+  position: relative;
+  text-align: center;
+}
+
+.video {
+  width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(61, 145, 241, 0.05);
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hover-to-play-text {
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(61, 145, 241, 0.9);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* bold */
+  font-weight: 600;
+}
+
+.hover-button {
+  width: 10%;
+  margin-right: 10px;
+}
+
+.container-architecture {
+  margin: 0 auto;
+  width: 70%;
+  max-width: 1400px;
+}
+
+
+@media only screen and (max-width: 1400px) {
+  .container-architecture {
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+.image-container {
+  position: relative;
+}
+
+.magic_overlap {
+  width: 100%;
+}
+
+.point {
+  font-style: normal;
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: rgba(255, 162, 0, 1.0);
+}
+
+.arch-details {
+  font-size: 16px; 
+  font-style: normal;
+  text-align: justify;
+}
+
+/* Define styles for the light theme */
+.tippy-box[data-theme~='light'] {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.tippy-box[data-theme~='light'] .tippy-content {
+  padding: 10px;
+}
+
+ol.questions-list {
+  list-style-type: none; /* remove default list style */
+  counter-reset: my-counter; /* initialize the counter */
+}
+ol.questions-list li::before {
+  content: counter(my-counter, upper-alpha) ". "; /* set the counter and format the output as uppercase letters with a period and a space */
+  counter-increment: my-counter; /* increment the counter */
+  font-weight: bold;
+  padding-left: 0.5em;
+}
+
+@media only screen and (max-width: 800px) {
+  .hide-on-small {
+      display: none;
+  }
+}
