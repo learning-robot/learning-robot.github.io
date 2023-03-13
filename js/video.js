@@ -47,15 +47,15 @@ function changeVideoTask() {
   var video_folder = "assets/videos/tasks/";
   var video2Value = videoMap[taskValue + "_" + camValue];
   var playPauseButton = document.getElementById('play-pause');
-
+  
   var new_video1 = video_folder + taskValue + "_fpv_view.mp4"
   if (!video1.src.includes(new_video1)) {
     video1.src = new_video1;
     video1.currentTime = 0;
     video2.currentTime = 0;
-    // Reset slide
-    const slider = document.querySelector('input[name="taskslider"]');
-    slider.value = 0;
+    video1.addEventListener("loadedmetadata", () => {
+      taskslider.value = video1.currentTime;
+    });
   }
   var new_video2 = video_folder + video2Value + "_view.mp4"
   if (!video2.src.includes(new_video2)) {
@@ -82,15 +82,15 @@ function updateVideos(value) {
   video2.currentTime = newTime;
 }
 
-function updateTaskSlider(video) {
-  // Get the range input element
-  const slider = document.querySelector('input[type="range"][name="taskslider"]');
+const taskslider = document.querySelector('input[type="range"][name="taskslider"]');
+taskslider.value = 0;
 
+function updateTaskSlider(video) {
   // Calculate the current progress of the video
   const progress = (video.currentTime / video.duration) * 100;
 
   // Update the value of the range input element
-  slider.value = progress;
+  taskslider.value = progress;
 }
 
 function toggleTaskPlayPause() {
@@ -154,7 +154,6 @@ desired.addEventListener("ended", () => {
 supernatural.play();
 
 // Occlusions
-
 var occlusions_fpv = document.getElementById("occlusion-fpv-video");
 var occlusions_side = document.getElementById("occlusion-side-video");
 function changeOcclusionTask() {
@@ -168,8 +167,9 @@ function changeOcclusionTask() {
   occlusions_side.currentTime = 0;
 
   // Reset slide
-  const slider = document.querySelector('input[name="occlusionslider"]');
-  slider.value = 0;
+  occlusions_fpv.addEventListener("loadedmetadata", () => {
+    occlusionslider.value = occlusions_fpv.currentTime;
+  });
   if (playPauseButton.innerHTML == '||') {
     occlusions_fpv.play();
     occlusions_side.play();
@@ -192,15 +192,14 @@ function toggleOcclusionPlayPause() {
   }
 }
 
-function updateOcclusionSlider(video) {
-  // Get the range input element
-  const slider = document.querySelector('input[type="range"][name="occlusionslider"]');
+const occlusionslider = document.querySelector('input[type="range"][name="occlusionslider"]');
 
+function updateOcclusionSlider(video) {
   // Calculate the current progress of the video
   const progress = (video.currentTime / video.duration) * 100;
 
   // Update the value of the range input element
-  slider.value = progress;
+  occlusionslider.value = progress;
 }
 
 function updateOcclusionVideos(value) {
