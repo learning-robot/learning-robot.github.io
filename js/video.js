@@ -84,7 +84,7 @@ function updateVideos(value) {
 
 function updateTaskSlider(video) {
   // Get the range input element
-  const slider = document.querySelector('input[type="range"]');
+  const slider = document.querySelector('input[type="range"][name="taskslider"]');
 
   // Calculate the current progress of the video
   const progress = (video.currentTime / video.duration) * 100;
