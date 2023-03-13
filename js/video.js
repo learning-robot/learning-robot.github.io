@@ -241,3 +241,35 @@ MathJax = {
     inlineMath: [['$', '$'], ['\\(', '\\)']]
   }
 };
+
+const preloadVideoFiles = [
+  "occlusions/occlusion1_fpv.mp4",
+  "occlusions/occlusion1_side.mp4",
+  "occlusions/occlusion2_fpv.mp4",
+  "occlusions/occlusion2_side.mp4",
+  "occlusions/occlusion3_fpv.mp4",
+  "occlusions/occlusion3_side.mp4",
+  "occlusions/occlusion4_fpv.mp4",
+  "occlusions/occlusion4_side.mp4",
+  "tasks/close_back_view.mp4",
+  "tasks/close_fpv_view.mp4",
+  "tasks/close_side_view.mp4",
+  "tasks/close_top_view.mp4",
+  "tasks/grasp_back_view.mp4",
+  "tasks/grasp_fpv_view.mp4",
+  "tasks/grasp_side_view.mp4",
+  "tasks/grasp_top_view.mp4",
+  "tasks/close_back_view.mp4",
+  "tasks/close_fpv_view.mp4",
+  "tasks/close_side_view.mp4",
+  "tasks/close_top_view.mp4",
+]; // array of video filenames
+
+const cachedVideoElements = []; // array to hold the video elements
+// create video elements for each video file and start preloading
+preloadVideoFiles.forEach((filename) => {
+  const videoElement = document.createElement("video");
+  videoElement.src = `assets/videos/${filename}`;
+  videoElement.load();
+  cachedVideoElements.push(videoElement);
+});

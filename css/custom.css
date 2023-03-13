@@ -159,6 +159,22 @@ input[type="range"]::-webkit-slider-thumb {
   width: 100%;
 }
 
+
+.two-videos {
+  position: relative; /* enable absolute positioning of child elements */
+  width: 100%;
+  padding-bottom: 50%; /* set height based on 16:9 aspect ratio */
+}
+
+.two-videos video {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+
 .overlay {
   position: absolute;
   top: 0;
