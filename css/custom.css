@@ -62,6 +62,13 @@ subtitle {
   max-width: 200px;
 }
 
+.youtube-summary-video{
+  margin-top: 40px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 .results-fig{
   width: 100%;
   max-width: 450px;
