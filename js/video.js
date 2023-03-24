@@ -272,3 +272,13 @@ preloadVideoFiles.forEach((filename) => {
   videoElement.load();
   cachedVideoElements.push(videoElement);
 });
+
+function copyText() {
+  const citationText = document.getElementById("citationText").innerText;
+  const textarea = document.createElement("textarea");
+  textarea.value = citationText;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+}
